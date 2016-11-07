@@ -12,9 +12,13 @@
   "dependencies": {
     "always-tail": "^0.2.0",
     "aws-sdk": "^2.3.4",
+    "diff": "3.0.1",
+    "fs-plus": "^2.9.3",
+    "jsonfile": "^2.4.0",
     "lockfile": "^1.0.1",
     "logrotator": "^1.0.1",
+    "pako": "^1.0.3",
     "proper-lockfile": "https://github.com/Luiz-N/node-proper-lockfile",
-    "tail": "^1.1.0"
+    "tail": "^1.1.0",
   }
 }
