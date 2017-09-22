@@ -18,7 +18,8 @@
     "lockfile": "^1.0.1",
     "logrotator": "^1.0.1",
     "pako": "^1.0.3",
-    "proper-lockfile": "https://github.com/Luiz-N/node-proper-lockfile",
-    "tail": "^1.1.0"
+    "proper-lockfile": "2.0.1",
+    "tail": "^1.1.0",
+    "threads": "^0.8.1"
   }
 }
