@@ -21,6 +21,7 @@ move_line_to_bottom()
 }
 
 install_script() {
+  echo "$1"
   check_if_last_line $1 || move_line_to_bottom $1
 }
 
@@ -30,14 +31,9 @@ ask_to_start_tracking()
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
-    # save prompt here to reference later in sub-process via bashrc
-    # export ORIGPS1=🐦 \ $PS1
-
     addMetadata() {
-      x=0
       while IFS= read -r line; do
-        ((x++))
-        if [[ $x -eq 2 ]] || [[ $line == *"🐦"* ]] && [[ $line != *"$ exit"* ]]
+        if [[ $line != *$' exit\r' ]]
         then
           # linux-gne also seems to do an extra script layer... not sure why
           PARENTPID=$(pgrep -P "$$" "script" | awk '{system("echo " $1)}')
@@ -45,14 +41,18 @@ ask_to_start_tracking()
           pgrep -P "$PARENTPID" "script" && PARENTPID=$(pgrep -P "$PARENTPID" "script" | awk '{system("echo " $1)}')
 
           CHILDPID=$(pgrep -P "$PARENTPID" "bash" | awk '{system("echo " $1)}')
-          # # TODO: pwdx solution for linux 
+          # # TODO: pwdx solution for linux
           CWD=$(lsof -p "$CHILDPID" | grep "cwd" | awk '{system("echo " $9)}')
-          printf "%s\n" "current-cwd: $CWD/\r"
-          x=0
+          # printf "%s\n" "current-cwd: $CWD/\r"
+          # x=0
+          printf "$CWD/ |//🐦//| $(date +%s) |//🐦//| $line"
+        else
+          return
         fi
+
+        printf '\n'
         # printf "%s %s\n" "$(date)" "$line" | tr -cd '[:print:]\r\t\v\x2705'
         # printf "%s %s\n" "$(date +%s):" "$line" | tr -cd '[:print:]\r\t'
-        printf "%s %s\n" "$(date +%s):" "$line"
 
 
         # printf "%s %s\n" "$(date)" "$line" | sed -e 's/[^A-Za-z0-9._-!?@#$%^&*()=+|{}<>,|`~"]/??/g'
@@ -62,6 +62,7 @@ ask_to_start_tracking()
       # done
     }
     printf "%s\n" "Logging Terminal Session..."
+    # save prompt here to reference later in sub-process via bashrc
     export ORIGPS1=$PS1
     # linux requires lowercase -f here
     [[ $OSTYPE == *"linux"* ]] && f=f || f=F
@@ -79,15 +80,19 @@ ask_to_start_tracking()
 install_script $BASHRC_PATH
 install_script $BASH_PROFILE_PATH
 
-if [[ $(ps -fp "$PPID" | grep "script -a -q -" || ps -fp "$PPID" | grep "bash -i") ]] 
+if [[ $1 = "no-track" ]]
+  then
+    echo 'exiting'
+elif [[ $(ps -fp "$PPID" | grep "script -a -q -" || ps -fp "$PPID" | grep "bash -i") ]]
   then
     # if we get here then we are in the new typescript session
     # remove source to this script then reload bash_profile to set everything back to "normal"
-    ex +g/record-console.sh/d -cwq "$BASH_PROFILE_PATH"
-    source ~/.bash_profile
-    move_line_to_bottom $BASH_PROFILE_PATH
+    # ex +g/record-console.sh/d -cwq "$BASH_PROFILE_PATH"
+    # source ~/.bash_profile
+    # move_line_to_bottom $BASH_PROFILE_PATH
+    echo "setting $PS1 to $ORIGPS1"
     PS1=🐦\ $ORIGPS1
     clear
-  else 
+  else
     ask_to_start_tracking
 fi
