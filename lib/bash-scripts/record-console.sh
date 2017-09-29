@@ -45,7 +45,7 @@ ask_to_start_tracking()
           CWD=$(lsof -p "$CHILDPID" | grep "cwd" | awk '{system("echo " $9)}')
           # printf "%s\n" "current-cwd: $CWD/\r"
           # x=0
-          printf "$CWD/ |//🐦//| $(date +%s) |//🐦//| $line"
+          printf "%s" "$CWD/ |//🐦//| $(date +%s) |//🐦//| $line"
         else
           return
         fi
