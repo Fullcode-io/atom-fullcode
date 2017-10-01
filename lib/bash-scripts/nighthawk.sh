@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LINE_TO_ADD=". $HOME/.nighthawk/nighthawk.sh"
-BASHRC_PATH="$HOME/.bashrc2"
+BASHRC_PATH="$HOME/.bashrc"
 BASH_PROFILE_PATH=$HOME/.bash_profile
 PROFILE_PATH=$HOME/.profile
 
@@ -46,15 +46,12 @@ ask_to_start_tracking()
 # if script is not last line then move it to bottom and return
 install_script
 
-if [[ $1 = "no-track" ]]
+if [[ ! -z $SCRIPT || $(ps -fp "$PPID" | grep "script -a -q -" || ps -fp "$PPID" | grep "bash -i") ]]
 then
-  echo 'exiting'
-elif [[ ! -z $SCRIPT || $(ps -fp "$PPID" | grep "script -a -q -" || ps -fp "$PPID" | grep "bash -i") ]]
-then
-  # if we get here then we are in the new typescript session
-  # remove source to this script then reload bash_profile to set everything back to "normal"
+  # if we get here then we are already in a "script" session
   if [ "$NIGHTHAWK" != true ]
   then
+    # after starting new session reload configs & flip flag to prevent recursive inception
     export NIGHTHAWK=true
     # echo 'reloading profiles'
     [ -s "$BASH_PROFILE_PATH" ] && . "$BASH_PROFILE_PATH"
@@ -69,5 +66,6 @@ then
   return
 
   else
-    ask_to_start_tracking
+    # make sure this is a interactive session
+    test "$PS1" && ask_to_start_tracking
 fi
