@@ -1,26 +1,16 @@
 #!/bin/bash
 
-LINE_TO_ADD="source ~/.nighthawk/record-console.sh"
-BASHRC_PATH=$HOME/.bashrc
+LINE_TO_ADD=". $HOME/.nighthawk/nighthawk.sh"
+BASHRC_PATH="$HOME/.bashrc2"
 BASH_PROFILE_PATH=$HOME/.bash_profile
-
-check_if_last_line()
-{
-  touch "$1"
-  # check if this script is at bottom of profile
-  tail -n 1 "$1" | grep -qsFx "$LINE_TO_ADD"
-}
-
-move_line_to_bottom()
-{
-    ex +g/record-console.sh/d -cwq "$1"
-    printf "%s\n" "$LINE_TO_ADD" >> "$1"
-    # if script line was moved to bottom then exit script since it will be called again later
-    return
-}
+PROFILE_PATH=$HOME/.profile
 
 install_script() {
-  check_if_last_line $1 || move_line_to_bottom $1
+  touch $BASHRC_PATH
+  if ! grep -q ".nighthawk/nighthawk.sh" $BASHRC_PATH
+  then
+    printf "%s\n" "$LINE_TO_ADD" >> $BASHRC_PATH
+  fi
 }
 
 ask_to_start_tracking()
@@ -31,8 +21,8 @@ ask_to_start_tracking()
   then
     addMetadata() {
       if [[ -z $SCRIPT ]]
-        then
-          echo 'Nighthawk running'
+      then
+        echo 'Nighthawk running'
       fi
 
       while IFS= read -r line; do
@@ -54,25 +44,30 @@ ask_to_start_tracking()
   fi
 }
 # if script is not last line then move it to bottom and return
-install_script $BASHRC_PATH
+install_script
 
 if [[ $1 = "no-track" ]]
-  then
-    echo 'exiting'
+then
+  echo 'exiting'
 elif [[ ! -z $SCRIPT || $(ps -fp "$PPID" | grep "script -a -q -" || ps -fp "$PPID" | grep "bash -i") ]]
-    then
-      # if we get here then we are in the new typescript session
-      # remove source to this script then reload bash_profile to set everything back to "normal"
-      if [ "$NIGHTHAWK" != true ]
-        then
-          export NIGHTHAWK=true
-          echo 'reloading profile'
-          [ -s "$BASH_PROFILE_PATH" ] && source "$BASH_PROFILE_PATH"
-          PS1="🐦 $PS1"
-      else
-        echo 'already in nh script! not loading profile'
-      fi
-      return
+then
+  # if we get here then we are in the new typescript session
+  # remove source to this script then reload bash_profile to set everything back to "normal"
+  if [ "$NIGHTHAWK" != true ]
+  then
+    export NIGHTHAWK=true
+    # echo 'reloading profiles'
+    [ -s "$BASH_PROFILE_PATH" ] && . "$BASH_PROFILE_PATH"
+    [ -s "$BASHRC_PATH" ] && . "$BASHRC_PATH"
+    [ -s "$PROFILE_PATH" ] && . "$BASHRC_PATH"
+    PS1="🐦 $PS1"
+  else
+    # echo 'already in nh script! not loading profile'
+    return
+  fi
+
+  return
+
   else
     ask_to_start_tracking
 fi
