@@ -5,6 +5,14 @@ BASHRC_PATH="$HOME/.bashrc"
 BASH_PROFILE_PATH=$HOME/.bash_profile
 PROFILE_PATH=$HOME/.profile
 
+trap clean_up EXIT
+
+clean_up() {
+  echo "Exiting Nighthawk session"
+  echo "Start a new session manually by entering nighthawk"
+  printf "\033]0;\007"
+}
+
 install_script() {
   touch $BASHRC_PATH
   if ! grep -q ".nighthawk/nighthawk.sh" $BASHRC_PATH
@@ -15,14 +23,18 @@ install_script() {
 
 ask_to_start_tracking()
 {
-  read -p "Track Errors? Type 'y' or 'n'" -n 1 -r
+  read -p $'\nStart a new 🐦  Nighthawk session?\nEnter y or n:\n' -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
     addMetadata() {
       if [[ -z $SCRIPT ]]
       then
-        echo 'Nighthawk running'
+        clear
+        echo 'Nighthawk is now running!'
+        echo "You can always tell by the 🐦  emoji to the left of your prompt or tab."
+        echo "To exit a session simply enter exit."
+        echo "Start a new session manually by entering nighthawk."
       fi
 
       while IFS= read -r line; do
@@ -39,8 +51,11 @@ ask_to_start_tracking()
       done >> $HOME/.nighthawk/logs/session.log
     }
     # linux requires lowercase -f here
+    # export ORIG_PROMPT_COMMAND
     [[ $OSTYPE == *"linux"* ]] && f=f || f=F
     env PS1="$PS1" script -a -q -$f >(addMetadata)
+  else
+    echo "You can always start a Nighthawk session manually by entering nighthawk"
   fi
 }
 # if script is not last line then move it to bottom and return
@@ -58,6 +73,13 @@ then
     [ -s "$BASHRC_PATH" ] && . "$BASHRC_PATH"
     [ -s "$PROFILE_PATH" ] && . "$BASHRC_PATH"
     PS1="🐦 $PS1"
+    if [[ $OSTYPE == *"darwin"* ]]
+    then
+      PROMPT_COMMAND=$'printf "\e]1;%s\a" "🐦 - /${PWD##*/}"'
+    else
+      PROMPT_COMMAND=$'printf "\033]0;🐦 - /${PWD##*/}\007"'
+    fi
+
   else
     # echo 'already in nh script! not loading profile'
     return
