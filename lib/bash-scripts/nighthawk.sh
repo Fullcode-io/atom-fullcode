@@ -28,15 +28,6 @@ ask_to_start_tracking()
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
     addMetadata() {
-      if [[ -z $SCRIPT ]]
-      then
-        clear
-        echo 'Nighthawk is now running!'
-        echo "You can always tell by the 🐦  emoji to the left of your prompt or tab."
-        echo "To exit a session simply enter exit."
-        echo "Start a new session manually by entering nighthawk."
-      fi
-
       while IFS= read -r line; do
           PARENTPID=$(pgrep -P "$$" "script" | awk '{system("echo " $1)}')
           if [[ -z $PARENTPID ]]; then return 0; fi
@@ -47,27 +38,34 @@ ask_to_start_tracking()
           # # TODO: pwdx solution for linux
           CWD=$(lsof -p "$CHILDPID" | grep "cwd" | awk '{system("echo " $9)}')
           printf "%s\n" "$CWD/ |//🐦//| $(date +%s) |//🐦//| $line"
-
       done >> $HOME/.nighthawk/logs/session.log
     }
+    if [[ -z $SCRIPT ]]
+    then
+      clear
+      echo 'Nighthawk is now running!'
+      echo "You can always tell by the 🐦  emoji to the left of your prompt or tab."
+      echo "To exit a session simply enter exit."
+      echo "Start a new session manually by entering nighthawk."
+    fi
     # linux requires lowercase -f here
     # export ORIG_PROMPT_COMMAND
     [[ $OSTYPE == *"linux"* ]] && f=f || f=F
-    env PS1="$PS1" script -a -q -$f >(addMetadata)
+    env PS1="$PS1" SCRIPT=true script -a -q -$f >(addMetadata)
   else
-    echo "You can always start a Nighthawk session manually by entering nighthawk"
+    echo "You can always start a Nighthawk session manually by entering the command nighthawk"
   fi
 }
 # if script is not last line then move it to bottom and return
 install_script
 
-if [[ ! -z $SCRIPT || $(ps -fp "$PPID" | grep "script -a -q -" || ps -fp "$PPID" | grep "bash -i") ]]
+if [[ ! -z $SCRIPT ]]
 then
   # if we get here then we are already in a "script" session
-  if [ "$NIGHTHAWK" != true ]
+  if [ "$CONFIGS_LOADED" != true ]
   then
     # after starting new session reload configs & flip flag to prevent recursive inception
-    export NIGHTHAWK=true
+    export CONFIGS_LOADED=true
     # echo 'reloading profiles'
     [ -s "$BASH_PROFILE_PATH" ] && . "$BASH_PROFILE_PATH"
     [ -s "$BASHRC_PATH" ] && . "$BASHRC_PATH"
@@ -84,10 +82,7 @@ then
     # echo 'already in nh script! not loading profile'
     return
   fi
-
-  return
-
-  else
-    # make sure this is a interactive session
-    test "$PS1" && ask_to_start_tracking
+else
+  # make sure this is a interactive session
+  test "$PS1" && ask_to_start_tracking
 fi
