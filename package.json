@@ -20,6 +20,7 @@
     "lockfile": "^1.0.1",
     "lodash.debounce": "^4.0.8",
     "logrotator": "^1.0.1",
+    "node-fetch": "^2.0.0-alpha.9",
     "pako": "^1.0.3",
     "proper-lockfile": "luiz-n/node-proper-lockfile",
     "tail": "^1.1.0",

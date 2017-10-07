@@ -37,7 +37,7 @@ ask_to_start_tracking()
           if [[ -z $CHILDPID ]]; then return 0; fi
           # # TODO: pwdx solution for linux
           CWD=$(lsof -p "$CHILDPID" | grep "cwd" | awk '{system("echo " $9)}')
-          printf "%s\n" "$CWD/ |//🐦//| $(date +%s) |//🐦//| $line"
+          printf "%s\n" "$CWD/|//🐦//|$(date +%s)|//🐦//|$line"
       done >> $HOME/.nighthawk/logs/session.log
     }
     if [[ -z $SCRIPT ]]
@@ -56,7 +56,7 @@ ask_to_start_tracking()
     echo "You can always start a Nighthawk session manually by entering the command nighthawk"
   fi
 }
-# if script is not last line then move it to bottom and return
+# ensure script is installed in bashrc
 install_script
 
 if [[ ! -z $SCRIPT ]]
@@ -69,7 +69,7 @@ then
     # echo 'reloading profiles'
     [ -s "$BASH_PROFILE_PATH" ] && . "$BASH_PROFILE_PATH"
     [ -s "$BASHRC_PATH" ] && . "$BASHRC_PATH"
-    [ -s "$PROFILE_PATH" ] && . "$BASHRC_PATH"
+    [ -s "$PROFILE_PATH" ] && . "$PROFILE_PATH"
     PS1="🐦 $PS1"
     if [[ $OSTYPE == *"darwin"* ]]
     then
