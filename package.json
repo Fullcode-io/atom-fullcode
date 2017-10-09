@@ -10,20 +10,23 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "always-tail": "^0.2.0",
     "aws-sdk": "^2.3.4",
     "diff": "3.0.1",
+    "event-kit": "^2.4.0",
     "firebase": "^4.4.0",
     "fs-extra": "^4.0.2",
     "git-repo-info": "^1.4.1",
+    "ignore": "^3.3.5",
     "jsonfile": "^2.4.0",
     "lockfile": "^1.0.1",
     "lodash.debounce": "^4.0.8",
     "logrotator": "^1.0.1",
     "node-fetch": "^2.0.0-alpha.9",
     "pako": "^1.0.3",
+    "promise-retry": "^1.1.1",
     "proper-lockfile": "luiz-n/node-proper-lockfile",
-    "tail": "^1.1.0",
+    "remote-origin-url": "^1.0.0",
+    "tail": "^1.2.2",
     "threads": "^0.8.1"
   }
 }

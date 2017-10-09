@@ -31,7 +31,7 @@ ask_to_start_tracking()
       while IFS= read -r line; do
           PARENTPID=$(pgrep -P "$$" "script" | awk '{system("echo " $1)}')
           if [[ -z $PARENTPID ]]; then return 0; fi
-          # # linux ssh shells have an extra process layer
+          # ssh shells have an extra process layer
           # pgrep -P "$PARENTPID" "script" && PARENTPID=$(pgrep -P "$PARENTPID" "script" | awk '{system("echo " $1)}')
           CHILDPID=$(pgrep -P "$PARENTPID" "bash" | awk '{system("echo " $1)}')
           if [[ -z $CHILDPID ]]; then return 0; fi
@@ -51,7 +51,7 @@ ask_to_start_tracking()
     # linux requires lowercase -f here
     # export ORIG_PROMPT_COMMAND
     [[ $OSTYPE == *"linux"* ]] && f=f || f=F
-    env PS1="$PS1" SCRIPT=true script -a -q -$f >(addMetadata)
+    env PS1="$PS1" SCRIPT=true PWD="$PWD" script -a -q -$f >(addMetadata)
   else
     echo "You can always start a Nighthawk session manually by entering the command nighthawk"
   fi
@@ -64,7 +64,7 @@ then
   # if we get here then we are already in a "script" session
   if [ "$CONFIGS_LOADED" != true ]
   then
-    # after starting new session reload configs & flip flag to prevent recursive inception
+    # after starting new session reload configs but flip flag to prevent trips down the rabbit hole
     export CONFIGS_LOADED=true
     # echo 'reloading profiles'
     [ -s "$BASH_PROFILE_PATH" ] && . "$BASH_PROFILE_PATH"
@@ -83,6 +83,6 @@ then
     return
   fi
 else
-  # make sure this is a interactive session
+  # make sure this is an interactive session
   test "$PS1" && ask_to_start_tracking
 fi
