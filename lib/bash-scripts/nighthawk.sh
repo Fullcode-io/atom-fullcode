@@ -23,7 +23,7 @@ install_script() {
 
 ask_to_start_tracking()
 {
-  read -p $'\nStart a new 🐦  Nighthawk session?\nEnter y or n:\n' -n 1 -r
+  read -p $'\nStart a new fullCode session?\nEnter y or n:\n' -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
@@ -37,14 +37,14 @@ ask_to_start_tracking()
           if [[ -z $CHILDPID ]]; then return 0; fi
           # # TODO: pwdx solution for linux
           CWD=$(lsof -p "$CHILDPID" | grep "cwd" | awk '{system("echo " $9)}')
-          printf "%s\n" "$CWD/|//🐦//|$(date +%s)|//🐦//|$line"
+          printf "%s\n" "$CWD/|//*//|$(date +%s)|//*//|$line"
       done >> $HOME/.nighthawk/logs/session.log
     }
     if [[ -z $SCRIPT ]]
     then
       clear
       echo 'Nighthawk is now running!'
-      echo "You can always tell by the 🐦  emoji to the left of your prompt or tab."
+      echo "You can always tell by the emoji to the left of your prompt or tab."
       echo "To exit a session simply enter exit."
       echo "Start a new session manually by entering nighthawk."
     fi
