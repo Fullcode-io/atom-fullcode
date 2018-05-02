@@ -1,8 +1,8 @@
 {
-  "name": "nighthawk",
-  "main": "./lib/nighthawk",
+  "name": "fullcode",
+  "main": "./lib/fullcode",
   "version": "0.0.1",
-  "description": "nighthawk atom plugin",
+  "description": "fullcode atom plugin",
   "keywords": [],
   "repository": "https://github.com/atom/nighthawk",
   "license": "MIT",

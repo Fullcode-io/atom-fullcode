@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LINE_TO_ADD=". $HOME/.nighthawk/nighthawk.sh"
+LINE_TO_ADD=". $HOME/.fullcode/fullcode.sh"
 BASHRC_PATH="$HOME/.bashrc"
 BASH_PROFILE_PATH=$HOME/.bash_profile
 PROFILE_PATH=$HOME/.profile
@@ -8,14 +8,14 @@ PROFILE_PATH=$HOME/.profile
 trap clean_up EXIT
 
 clean_up() {
-  echo "Exiting Nighthawk session"
-  echo "Start a new session manually by entering nighthawk"
+  echo "Exiting FullCode session"
+  echo "Start a new session manually by entering fullcode"
   printf "\033]0;\007"
 }
 
 install_script() {
   touch $BASHRC_PATH
-  if ! grep -q ".nighthawk/nighthawk.sh" $BASHRC_PATH
+  if ! grep -q ".fullcode/fullcode.sh" $BASHRC_PATH
   then
     printf "%s\n" "$LINE_TO_ADD" >> $BASHRC_PATH
   fi
@@ -38,22 +38,22 @@ ask_to_start_tracking()
           # # TODO: pwdx solution for linux
           CWD=$(lsof -p "$CHILDPID" | grep "cwd" | awk '{system("echo " $9)}')
           printf "%s\n" "$CWD/|//*//|$(date +%s)|//*//|$line"
-      done >> $HOME/.nighthawk/logs/session.log
+      done >> $HOME/.fullcode/logs/session.log
     }
     if [[ -z $SCRIPT ]]
     then
       clear
-      echo 'Nighthawk is now running!'
+      echo 'FullCode is now running!'
       echo "You can always tell by the emoji to the left of your prompt or tab."
       echo "To exit a session simply enter exit."
-      echo "Start a new session manually by entering nighthawk."
+      echo "Start a new session manually by entering fullcode."
     fi
     # linux requires lowercase -f here
     # export ORIG_PROMPT_COMMAND
     [[ $OSTYPE == *"linux"* ]] && f=f || f=F
     env PS1="$PS1" SCRIPT=true PWD="$PWD" script -a -q -$f >(addMetadata)
   else
-    echo "You can always start a Nighthawk session manually by entering the command nighthawk"
+    echo "You can always start a FullCode session manually by entering the command fullcode"
   fi
 }
 # ensure script is installed in bashrc
@@ -70,13 +70,7 @@ then
     [ -s "$BASH_PROFILE_PATH" ] && . "$BASH_PROFILE_PATH"
     [ -s "$BASHRC_PATH" ] && . "$BASHRC_PATH"
     [ -s "$PROFILE_PATH" ] && . "$PROFILE_PATH"
-    PS1="🐦 $PS1"
-    if [[ $OSTYPE == *"darwin"* ]]
-    then
-      PROMPT_COMMAND=$'printf "\e]1;%s\a" "🐦 - /${PWD##*/}"'
-    else
-      PROMPT_COMMAND=$'printf "\033]0;🐦 - /${PWD##*/}\007"'
-    fi
+    PS1="<FC> $PS1"
 
   else
     # echo 'already in nh script! not loading profile'
