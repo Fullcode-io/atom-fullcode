@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "fullcode atom plugin",
   "keywords": [],
-  "repository": "https://github.com/Luiz-N/atom-fullcode",
+  "repository": "https://github.com/fullcode-io/atom-fullcode",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
@@ -22,7 +22,7 @@
     "node-fetch": "^2.0.0-alpha.9",
     "pako": "^1.0.3",
     "promise-retry": "^1.1.1",
-    "proper-lockfile": "github:luiz-n/node-proper-lockfile",
+    "proper-lockfile": "github:fullcode-io/node-proper-lockfile",
     "remote-origin-url": "^1.0.0",
     "tail": "^1.2.2",
     "threads": "^0.8.1"
