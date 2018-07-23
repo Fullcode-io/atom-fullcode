@@ -1,7 +1,7 @@
 {
   "name": "fullcode",
   "main": "./lib/fullcode",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "fullcode atom plugin",
   "keywords": [],
   "repository": "https://github.com/fullcode-io/atom-fullcode",
