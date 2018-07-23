@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LINE_TO_ADD=". $HOME/.fullcode/fullcode.sh"
+RUN_FULLCODE=". $HOME/.fullcode/fullcode.sh"
 BASHRC_PATH="$HOME/.bashrc"
 BASH_PROFILE_PATH=$HOME/.bash_profile
 PROFILE_PATH=$HOME/.profile
@@ -10,14 +10,15 @@ trap clean_up EXIT
 clean_up() {
   echo "Exiting FullCode session"
   echo "Start a new session manually by entering fullcode"
-  printf "\033]0;\007"
+  alias fullcode=$RUN_FULLCODE
+  # printf "\033]0;\007"
 }
 
 install_script() {
   touch $BASHRC_PATH
   if ! grep -q ".fullcode/fullcode.sh" $BASHRC_PATH
   then
-    printf "%s\n" "$LINE_TO_ADD" >> $BASHRC_PATH
+    printf "%s\n" "$RUN_FULLCODE" >> $BASHRC_PATH
   fi
 }
 
@@ -44,9 +45,10 @@ ask_to_start_tracking()
     then
       clear
       echo 'FullCode is now running!'
-      echo "You can always tell by the emoji to the left of your prompt or tab."
+      echo "You can always tell by checking for <FC> to the left of your prompt."
       echo "To exit a session simply enter exit."
-      echo "Start a new session manually by entering fullcode."
+      echo "Start a new session manually by entering fullcode"
+      alias fullcode=$RUN_FULLCODE
     fi
     # linux requires lowercase -f here
     # export ORIG_PROMPT_COMMAND
@@ -54,6 +56,7 @@ ask_to_start_tracking()
     env PS1="$PS1" SCRIPT=true PWD="$PWD" script -a -q -$f >(addMetadata)
   else
     echo "You can always start a FullCode session manually by entering the command fullcode"
+    alias fullcode=$RUN_FULLCODE
   fi
 }
 # ensure script is installed in bashrc
@@ -73,7 +76,7 @@ then
     PS1="<FC> $PS1"
 
   else
-    # echo 'already in nh script! not loading profile'
+    # echo 'This session is already running Fullcode'
     return
   fi
 else
