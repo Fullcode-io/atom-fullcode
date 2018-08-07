@@ -1,13 +1,42 @@
 {
-  "name": "fullcode",
-  "main": "./lib/fullcode",
-  "version": "0.3.6",
-  "description": "fullcode atom plugin",
-  "keywords": [],
-  "repository": "https://github.com/fullcode-io/atom-fullcode",
-  "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-118623-91670-tnyaab.kquohto6r/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-118623-91670-tnyaab.kquohto6r/package.tgz",
+        "spec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-118623-91670-tnyaab.kquohto6r/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/apm-install-dir-118623-91670-69fe7s.70y6jkbj4i"
+    ]
+  ],
+  "_from": "../d-118623-91670-tnyaab.kquohto6r/package.tgz",
+  "_id": "fullcode@0.3.4",
+  "_inCache": true,
+  "_location": "/fullcode",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-118623-91670-tnyaab.kquohto6r/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-118623-91670-tnyaab.kquohto6r/package.tgz",
+    "spec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-118623-91670-tnyaab.kquohto6r/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-118623-91670-tnyaab.kquohto6r/package.tgz",
+  "_shasum": "5606bf05d4b07e92af91403d7c730773b25095f4",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-118623-91670-tnyaab.kquohto6r/package.tgz",
+  "_where": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/apm-install-dir-118623-91670-69fe7s.70y6jkbj4i",
+  "bugs": {
+    "url": "https://github.com/fullcode-io/atom-fullcode/issues"
   },
   "dependencies": {
     "event-kit": "^2.4.0",
@@ -26,5 +55,23 @@
     "remote-origin-url": "^1.0.0",
     "tail": "^1.2.2",
     "threads": "^0.8.1"
-  }
+  },
+  "description": "fullcode atom plugin",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/fullcode-io/atom-fullcode#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "./lib/fullcode",
+  "name": "fullcode",
+  "optionalDependencies": {},
+  "readme": "#atom-fullCode\n\n***TODO: add info here\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fullcode-io/atom-fullcode.git"
+  },
+  "version": "0.3.4"
 }
