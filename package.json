@@ -66,7 +66,7 @@
   "keywords": [],
   "license": "MIT",
   "main": "./lib/fullcode",
-  "name": "atom-fullcode",
+  "name": "fullcode",
   "consumedServices": {
     "status-bar": {
       "versions": {
