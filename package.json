@@ -79,7 +79,7 @@
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fullcode-io/atom-fullcode.git"
+    "url": "https://github.com/fullcode-io/atom-fullcode.git"
   },
   "version": "0.4.1"
 }
