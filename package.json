@@ -39,6 +39,7 @@
     "url": "https://github.com/fullcode-io/atom-fullcode/issues"
   },
   "dependencies": {
+    "atom-select-list": "^0.7.1",
     "event-kit": "^2.4.0",
     "firebase": "^4.4.0",
     "fs-extra": "^4.0.2",
@@ -65,7 +66,14 @@
   "keywords": [],
   "license": "MIT",
   "main": "./lib/fullcode",
-  "name": "fullcode",
+  "name": "atom-fullcode",
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    }
+  },
   "optionalDependencies": {},
   "readme": "#atom-fullCode\n\n***TODO: add info here\n",
   "readmeFilename": "README.md",
