@@ -14,39 +14,39 @@
     ],
     [
       {
-        "raw": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11878-84100-12kmb8b.hmfo672e29/package.tgz",
+        "raw": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11879-78839-1c15w6q.wsyxgh9f6r/package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11878-84100-12kmb8b.hmfo672e29/package.tgz",
-        "spec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11878-84100-12kmb8b.hmfo672e29/package.tgz",
+        "rawSpec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11879-78839-1c15w6q.wsyxgh9f6r/package.tgz",
+        "spec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11879-78839-1c15w6q.wsyxgh9f6r/package.tgz",
         "type": "local"
       },
-      "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/apm-install-dir-11878-84100-12y291d.kiqsn61or"
+      "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/apm-install-dir-11879-78839-1z0pl6y.3x266wp14i"
     ]
   ],
-  "_from": "../d-11878-84100-12kmb8b.hmfo672e29/package.tgz",
-  "_id": "atom-fullcode@0.4.2",
+  "_from": "../d-11879-78839-1c15w6q.wsyxgh9f6r/package.tgz",
+  "_id": "atom-fullcode@0.4.3",
   "_inCache": true,
   "_location": "/atom-fullcode",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11878-84100-12kmb8b.hmfo672e29/package.tgz",
+    "raw": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11879-78839-1c15w6q.wsyxgh9f6r/package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11878-84100-12kmb8b.hmfo672e29/package.tgz",
-    "spec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11878-84100-12kmb8b.hmfo672e29/package.tgz",
+    "rawSpec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11879-78839-1c15w6q.wsyxgh9f6r/package.tgz",
+    "spec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11879-78839-1c15w6q.wsyxgh9f6r/package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:../d-11878-84100-12kmb8b.hmfo672e29/package.tgz",
+  "_resolved": "file:../d-11879-78839-1c15w6q.wsyxgh9f6r/package.tgz",
   "_shasum": "5606bf05d4b07e92af91403d7c730773b25095f4",
   "_shrinkwrap": null,
-  "_spec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11878-84100-12kmb8b.hmfo672e29/package.tgz",
-  "_where": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/apm-install-dir-11878-84100-12y291d.kiqsn61or",
+  "_spec": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/d-11879-78839-1c15w6q.wsyxgh9f6r/package.tgz",
+  "_where": "/private/var/folders/66/175hzzb55vn5f6wg53glgy8r0000gn/T/apm-install-dir-11879-78839-1z0pl6y.3x266wp14i",
   "bugs": {
     "url": "https://github.com/fullcode-io/atom-fullcode/issues"
   },
@@ -60,7 +60,7 @@
   "dependencies": {
     "atom-select-list": "^0.7.1",
     "event-kit": "^2.4.0",
-    "firebase": "^4.4.0",
+    "firebase": "^5.4.0",
     "fs-extra": "^4.0.2",
     "git-repo-info": "^1.4.1",
     "ignore": "^3.3.5",
